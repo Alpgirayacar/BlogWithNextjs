@@ -7,7 +7,7 @@ function contact(){
       <Navigation></Navigation>
       <h1>iletisim</h1>
       <div hight="300" >
-        <form action="/api/users" method="post">
+        <form action="/api/users2" method="post">
           <label for="name">Name:</label>
           <input type="text" id="name" className="form-control" name="first" />
           <label for="email">Enter your email:</label>

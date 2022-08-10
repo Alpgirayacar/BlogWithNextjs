@@ -6,8 +6,8 @@ import Link from 'next/link'
 import useSWR from 'swr';
 
 
-export default function Home() {
-
+export default function Home(props) {
+  const posts=props.posts;
  /* const { data, error } = useSWR('/api/staticdata', fetcher);
 
   //Handle the error state
@@ -27,8 +27,15 @@ export default function Home() {
     
 
   </div>
+
  
-  
+  {posts.map(post=>
+            <div className="card-body"> 
+                 <h4 className="card-title">{post.id}</h4>
+                <p className="card-text">{post.title}</p>
+                <p className="card-text">{post.content}</p>
+                </div>
+                )}  
   
 
   
@@ -38,3 +45,19 @@ export default function Home() {
 
   )
 }
+
+import fsPromises from 'fs/promises';
+import path from 'path'
+
+
+export async function getServerSideProps(){
+    const filePath=path.join(process.cwd(),'data.json');
+    const jsonData=await fsPromises.readFile(filePath);
+    const objectData=JSON.parse(jsonData);
+    console.log(objectData);
+
+    return{
+        props:objectData
+    }
+  }
+
